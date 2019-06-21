@@ -1,0 +1,33 @@
+.social {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+
+    &-link {
+        margin: 10px;
+        text-decoration: none;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    &-icon {
+        $size: 50px;
+
+        height: $size;
+        width: $size;
+        line-height: $size;
+        font-size: $size * 0.5;
+        border-radius: 50%;
+
+        color: color(light);
+        background-color: color(dark);
+        border: 1px solid color(accent);
+
+        transition: ease-in-out 200ms;
+
+        &:hover {
+            background-color: darken(color(dark), 5);
+            transition: ease-in-out 200ms;
+        }
+    }
+}

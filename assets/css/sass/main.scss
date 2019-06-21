@@ -3,7 +3,9 @@
 @import 'abstracts/functions';
 
 /* base */
+@import 'base/reset';
 @import 'base/typography';
+@import 'base/grid';
 
 /* layout */
 @import 'layout/container';
@@ -18,5 +20,6 @@
 @import 'components/options';
 @import 'components/gifs';
 @import 'components/search';
+@import 'components/title';
 @import 'components/btn';
-@import 'components/gif';
+@import 'components/gif-card';

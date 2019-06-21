@@ -1,0 +1,15 @@
+.btn {
+    border: 1px solid color(accent);
+    background-color: color(dark);
+    color: color(light);
+    border-radius: $rounded;
+    cursor: pointer;
+    display: block;
+
+    transition: ease-in-out 200ms;
+
+    &:hover {
+        background-color: darken(color(dark), 5);
+        transition: ease-in-out 200ms;
+    }
+}

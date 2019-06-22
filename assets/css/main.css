@@ -216,6 +216,7 @@ footer .container {
       -ms-flex-pack: end;
           justify-content: flex-end;
   margin: 1vh 1vw;
+  min-width: 20vw;
 }
 
 #search-group {
@@ -231,6 +232,7 @@ footer .container {
   border: 1px solid red;
   margin: 0.25vw;
   margin-left: 0;
+  padding: 8px 0;
   width: 100%;
 }
 

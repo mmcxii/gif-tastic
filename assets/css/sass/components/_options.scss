@@ -2,11 +2,15 @@
     margin: 1rem 0;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: space-evenly;
     flex-direction: row;
     width: 100%;
 
+    @media (min-width: 40rem) {
+        justify-content: flex-start;
+    }
+
     .btn {
-        margin: 0.15rem;
+        margin: 0.5vw;
     }
 }

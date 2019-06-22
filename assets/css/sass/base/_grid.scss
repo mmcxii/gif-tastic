@@ -1,6 +1,9 @@
 .row {
     display: flex;
-    flex-direction: row-reverse;
-    flex-wrap: wrap;
-    width: 100%;
+    flex-direction: column;
+    justify-content: space-around;
+
+    @media (min-width: 40rem) {
+        flex-direction: row-reverse;
+    }
 }

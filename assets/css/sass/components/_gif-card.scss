@@ -1,5 +1,18 @@
 .gif {
     &-card {
         margin: 0.2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    &-rating {
+        text-transform: uppercase;
+        margin-left: auto;
+
+        &::before {
+            content: 'Rating: ';
+            text-transform: capitalize;
+        }
     }
 }

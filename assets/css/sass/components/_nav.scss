@@ -4,6 +4,10 @@
     display: flex;
     justify-content: flex-end;
 
+    &-item {
+        margin: 0 0.5vw;
+    }
+
     &-link {
         text-decoration: none;
         color: color(accent);

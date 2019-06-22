@@ -91,6 +91,10 @@ footer .container {
           justify-content: flex-end;
 }
 
+.nav-item {
+  margin: 0 0.5vw;
+}
+
 .nav-link {
   text-decoration: none;
   color: red;

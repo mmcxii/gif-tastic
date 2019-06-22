@@ -156,7 +156,7 @@ footer .container {
 }
 
 #options {
-  margin: 1rem 0;
+  margin: 1vh 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -193,7 +193,7 @@ footer .container {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  margin: 0 1vw;
+  margin: 1vh 1vw;
 }
 
 @media (min-width: 40rem) {
@@ -211,7 +211,7 @@ footer .container {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
-  margin: 0 1vw;
+  margin: 1vh 1vw;
 }
 
 #search-group {

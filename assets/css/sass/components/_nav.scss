@@ -1,8 +1,10 @@
 .nav {
     list-style: none;
+    margin: 0;
 
     display: flex;
     justify-content: flex-end;
+    align-items: center;
 
     &-item {
         margin: 0 0.5vw;

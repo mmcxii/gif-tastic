@@ -4,3 +4,9 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+body {
+    background-image: url(../img/bg_su.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}

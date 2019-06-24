@@ -1,8 +1,12 @@
 $colors: (
     light: #eee,
     dark: #333,
-    accent: red,
+    accent: lighten(teal, 10),
 );
 
 // Common Layout
 $rounded: 5px;
+
+// Fonts
+$font-main: 'Roboto', sans-serif;
+$font-heading: 'Merriweather', serif;

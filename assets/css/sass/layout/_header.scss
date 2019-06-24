@@ -2,7 +2,8 @@ header {
     padding: 1% 0;
     margin-bottom: auto;
 
-    border-bottom: 5px solid red;
+    border-bottom: 5px solid color(accent);
+    background-color: color(light);
 
     .container {
         justify-content: space-between;

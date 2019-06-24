@@ -1,4 +1,5 @@
 /* base */
+@import url("https://fonts.googleapis.com/css?family=Merriweather|Roboto&display=swap");
 html,
 body {
   height: 100vh;
@@ -9,6 +10,21 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+}
+
+body {
+  background-image: url(../img/bg_su.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+* {
+  color: #eee;
+  font-family: "Roboto", sans-serif;
+}
+
+h1 {
+  font-family: "Merriweather", serif;
 }
 
 .row {
@@ -44,7 +60,8 @@ body {
 header {
   padding: 1% 0;
   margin-bottom: auto;
-  border-bottom: 5px solid red;
+  border-bottom: 5px solid #00b3b3;
+  background-color: #eee;
 }
 
 header .container {
@@ -56,6 +73,7 @@ header .container {
 #app {
   width: 100%;
   height: 100%;
+  margin: 1% 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -66,12 +84,16 @@ header .container {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
+  background-color: rgba(0, 0, 0, 0.25);
+  border: 2px solid white;
+  border-radius: 5px;
 }
 
 footer {
   margin-top: auto;
   padding: 1% 0;
-  border-top: 5px solid red;
+  border-top: 5px solid #00b3b3;
+  background-color: #eee;
 }
 
 footer .container {
@@ -101,14 +123,14 @@ footer .container {
 
 .nav-link {
   text-decoration: none;
-  color: red;
+  color: #00b3b3;
   font-size: 1.2rem;
   -webkit-transition: ease-in-out 200ms;
   transition: ease-in-out 200ms;
 }
 
 .nav-link:hover {
-  color: #e60000;
+  color: #009a9a;
   -webkit-transition: ease-in-out 200ms;
   transition: ease-in-out 200ms;
 }
@@ -122,6 +144,7 @@ footer .container {
           align-items: center;
   font-style: italic;
   font-size: 1.2rem;
+  color: #333;
 }
 
 .social {
@@ -148,7 +171,7 @@ footer .container {
   border-radius: 50%;
   color: #333;
   background-color: #eee;
-  border: 1px solid red;
+  border: 2px solid #00b3b3;
   -webkit-transition: ease-in-out 200ms;
   transition: ease-in-out 200ms;
 }
@@ -229,7 +252,8 @@ footer .container {
 
 #search-field {
   border-radius: 5px;
-  border: 1px solid red;
+  border: 2px solid #00b3b3;
+  background-color: #eee;
   margin: 0.25vw;
   margin-left: 0;
   padding: 8px 0;
@@ -249,10 +273,11 @@ footer .container {
           align-items: center;
   margin: 0;
   font-size: 2rem;
+  color: #333;
 }
 
 .btn {
-  border: 1px solid red;
+  border: 2px solid #00b3b3;
   background-color: #eee;
   color: #333;
   text-transform: capitalize;
@@ -282,6 +307,7 @@ footer .container {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
+  cursor: pointer;
 }
 
 .gif-rating {

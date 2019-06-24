@@ -11,12 +11,6 @@ let topics = [
     'stuff',
 ];
 
-$(document).ready(function() {
-    $('#options').on('click', '.btn', function() {
-        getRes(this.innerText);
-    });
-});
-
 function initialButtons(arr) {
     for (let i = 0; i < arr.length; i++) {
         btn(arr[i]);
@@ -54,6 +48,17 @@ function getRes(req) {
     });
 }
 
+const $searchForm = $('#search-group');
+
+$searchForm.submit((e) => {
+    const $input = $('#search-field');
+    btn($input.val());
+    getRes($input.val());
+
+    $input.val('');
+    e.preventDefault();
+});
+
 function search(req) {
     btn(req);
     getRes(req);
@@ -63,4 +68,10 @@ function slugify(req) {
     return req.replace(/\s+/g, '+').toLowerCase();
 }
 
-initialButtons(topics);
+$(document).ready(function() {
+    initialButtons(topics);
+
+    $('#options').on('click', '.btn', function() {
+        getRes(this.innerText);
+    });
+});

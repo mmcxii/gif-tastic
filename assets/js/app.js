@@ -24,25 +24,43 @@ function initialButtons(arr) {
 
 // Gif card with image and rating displayed
 function gifCard(id, url, rating) {
+    // Select target
+    const gifs = document.getElementById('gifs');
+
     // Pieces
-    const $gifCard = $(`<div class="gif-card" id='${id}' data-playing=false>`);
-    const $gifRating = $('<div class="gif-rating">').text(rating);
-    const $gifImg = $(`<img class='gif-img' src='${url}'>`);
+    const gifCard = document.createElement('div');
+    gifCard.setAttribute('class', 'gif-card');
+    gifCard.setAttribute('id', id);
+    gifCard.setAttribute('data-playing', 'false');
+
+    const gifRating = document.createElement('div');
+    gifRating.setAttribute('class', 'gif-rating');
+    gifRating.textContent = rating;
+
+    const gifImg = document.createElement('img');
+    gifImg.setAttribute('class', 'gif-img');
+    gifImg.setAttribute('src', url);
 
     // Build card
-    $gifCard.append($gifRating).append($gifImg);
+    gifCard.appendChild(gifRating);
+    gifCard.appendChild(gifImg);
 
     // Display card
-    $('#gifs').append($gifCard);
+    gifs.appendChild(gifCard);
 }
 
 // Button for gif topic
 function btn(text) {
+    // Select target
+    const options = document.getElementById('options');
+
     // Build button
-    const $btn = $(`<button class="btn">`).text(text);
+    const btn = document.createElement('button');
+    btn.setAttribute('class', 'btn');
+    btn.textContent = text;
 
     // Display button
-    $('#options').append($btn);
+    options.appendChild(btn);
 }
 
 /* Functionality */
@@ -55,39 +73,39 @@ function getRes(req) {
         req
     )}&api_key=${apiKey}&limit=10`;
 
-    // Make a request using ajax
-    $.ajax({
-        url: queryURL,
-        method: 'GET',
-    }).then((res) => {
-        // Make a gif card for each gif returned
-        $.each(res.data, (i, gif) => {
-            gifCard(gif.id, gif.images['original_still'].url, gif.rating);
+    // Make request using fetch api
+    fetch(queryURL)
+        .then((res) => res.json())
+        .then((data) => {
+            data.data.forEach((gif) => {
+                gifCard(gif.id, gif.images['original_still'].url, gif.rating);
+            });
         });
-    });
 }
 
 /* On click */
 
 // Play/ pause functionality
 function playPause(playing, id, current) {
-    // If the gif is stopped, start it
+    // Select correct gif by id
+    const currentGif = document.querySelector(`#${id} > .gif-img`);
+
     if (playing === 'false') {
-        // Select correct gif by id
-        $(`#${id} > .gif-img`).attr(
+        // If the gif is stopped, start it
+        currentGif.setAttribute(
             'src',
             `https://media2.giphy.com/media/${id}/giphy.gif?cid=${id}&rid=giphy.gif`
         );
+
         // Mark gif as playing
         current.dataset.playing = 'true';
-
-        // If the gif is playing, stop it
     } else {
-        // Select correct gif by id
-        $(`#${id} > .gif-img`).attr(
+        // If the gif is playing, stop it
+        currentGif.setAttribute(
             'src',
             `https://media0.giphy.com/media/${id}/giphy_s.gif?cid=${id}&rid=giphy_s.gif`
         );
+
         // Mark gif as stopped
         current.dataset.playing = 'false';
     }
@@ -95,8 +113,11 @@ function playPause(playing, id, current) {
 
 // Removes all gifs from display
 function clearGifs() {
+    // Select target
+    const gifs = document.getElementById('gifs');
+
     // Empty the display
-    $('#gifs').empty();
+    while (gifs.firstChild) gifs.removeChild(gifs.firstChild);
 }
 
 /* Helper */
@@ -109,32 +130,47 @@ function slugify(req) {
 /* Intialize */
 
 // Load functions and on clicks when document is loaded
-$(document).ready(function() {
+document.addEventListener('DOMContentLoaded', () => {
+    // Load initial buttons
     initialButtons(topics);
 
     // Assign the clear gifs button its function
-    $('#clear-gifs-btn').on('click', clearGifs);
+    const clearGifsBtn = document.getElementById('clear-gifs-btn');
+    clearGifsBtn.onclick = clearGifs;
 
     // Assign all buttons the ability to get gifs
-    $('#options').on('click', '.btn', function() {
-        getRes(this.innerText);
+    const options = document.getElementById('options');
+    options.addEventListener('click', (e) => {
+        // Only buttons are selected, not parent
+        if (e.target !== e.currentTarget) {
+            getRes(e.target.textContent);
+        }
+        e.stopPropagation();
     });
 
     // Assign all gifs the ability to play and pause
-    $('#gifs').on('click', '.gif-card', function() {
-        playPause(this.dataset.playing, this.id, this);
+    const gifs = document.getElementById('gifs');
+    gifs.addEventListener('click', (e) => {
+        // Only cards are selected, not parent
+        if (e.target !== e.currentTarget) {
+            // Selects card when image is clicked
+            const card = e.target.parentNode;
+            playPause(card.dataset.playing, card.id, card);
+        }
+        e.stopPropagation();
     });
 
     // Search form functionality
-    $('#search-group').submit((e) => {
-        const $input = $('#search-field');
+    const searchGroup = document.getElementById('search-group');
+    searchGroup.addEventListener('submit', (e) => {
+        const input = document.getElementById('search-field');
 
         // Create a button for searched term and get gifs
-        btn($input.val());
-        getRes($input.val());
+        btn(input.value);
+        getRes(input.value);
 
         // Empty search field
-        $input.val('');
+        input.value = '';
         e.preventDefault();
     });
 });

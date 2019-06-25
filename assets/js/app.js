@@ -59,7 +59,7 @@ function getRes(req) {
     $.ajax({
         url: queryURL,
         method: 'GET',
-    }).then(function(res) {
+    }).then((res) => {
         // Make a gif card for each gif returned
         $.each(res.data, (i, gif) => {
             gifCard(gif.id, gif.images['original_still'].url, gif.rating);

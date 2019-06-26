@@ -14,18 +14,6 @@ let topics = [
 
 /* Components */
 
-// Load buttons based on topics array
-function renderButtons(arr) {
-    // Empties previous buttons
-    const options = document.getElementById('options');
-    while (options.firstChild) options.removeChild(options.firstChild);
-
-    // Makes a button for each topic
-    arr.forEach((topic) => {
-        btn(topic);
-    });
-}
-
 // Gif card with image and rating displayed
 function gifCard(id, url, rating) {
     // Select target
@@ -134,6 +122,18 @@ function setAttributes(element, attributes) {
     for (const key in attributes) {
         element.setAttribute(key, attributes[key]);
     }
+}
+
+// Renders Buttons
+function renderButtons(arr) {
+    // Empties previous buttons
+    const options = document.getElementById('options');
+    while (options.firstChild) options.removeChild(options.firstChild);
+
+    // Makes a button for each topic
+    arr.forEach((topic) => {
+        btn(topic);
+    });
 }
 
 /* Intialize */

@@ -15,11 +15,15 @@ let topics = [
 /* Components */
 
 // Load buttons based on topics array
-function initialButtons(arr) {
-    for (let i = 0; i < arr.length; i++) {
+function renderButtons(arr) {
+    // Empties previous buttons
+    const options = document.getElementById('options');
+    while (options.firstChild) options.removeChild(options.firstChild);
+
+    arr.forEach((topic) => {
         // Makes a button for each topic
-        btn(arr[i]);
-    }
+        btn(topic);
+    });
 }
 
 // Gif card with image and rating displayed
@@ -137,7 +141,7 @@ function setAttributes(element, attributes) {
 // Load functions and on clicks when document is loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Load initial buttons
-    initialButtons(topics);
+    renderButtons(topics);
 
     // Assign the clear gifs button its function
     const clearGifsBtn = document.getElementById('clear-gifs-btn');
@@ -168,14 +172,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Search form functionality
     const searchGroup = document.getElementById('search-group');
     searchGroup.addEventListener('submit', (e) => {
+        e.preventDefault();
+
         const input = document.getElementById('search-field');
 
-        // Create a button for searched term and get gifs
-        btn(input.value);
+        // Stores topic in array and re-renders buttons
+        topics.push(input.value);
+        renderButtons(topics);
+
+        // Displays gifs
         getRes(input.value);
 
         // Empty search field
         input.value = '';
-        e.preventDefault();
     });
 });

@@ -20,8 +20,8 @@ function renderButtons(arr) {
     const options = document.getElementById('options');
     while (options.firstChild) options.removeChild(options.firstChild);
 
+    // Makes a button for each topic
     arr.forEach((topic) => {
-        // Makes a button for each topic
         btn(topic);
     });
 }
@@ -47,7 +47,7 @@ function gifCard(id, url, rating) {
     gifCard.appendChild(gifImg);
 
     // Display card
-    gifs.appendChild(gifCard);
+    gifs.prepend(gifCard);
 }
 
 // Button for gif topic

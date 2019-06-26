@@ -29,17 +29,14 @@ function gifCard(id, url, rating) {
 
     // Pieces
     const gifCard = document.createElement('div');
-    gifCard.setAttribute('class', 'gif-card');
-    gifCard.setAttribute('id', id);
-    gifCard.setAttribute('data-playing', 'false');
+    setAttributes(gifCard, { class: 'gif-card', id: id, 'data-playing': 'false' });
 
     const gifRating = document.createElement('div');
     gifRating.setAttribute('class', 'gif-rating');
     gifRating.textContent = rating;
 
     const gifImg = document.createElement('img');
-    gifImg.setAttribute('class', 'gif-img');
-    gifImg.setAttribute('src', url);
+    setAttributes(gifImg, { class: 'gif-img', src: url });
 
     // Build card
     gifCard.appendChild(gifRating);
@@ -80,14 +77,15 @@ function getRes(req) {
             data.data.forEach((gif) => {
                 gifCard(gif.id, gif.images['original_still'].url, gif.rating);
             });
-        });
+        })
+        .catch((error) => console.error(error));
 }
 
 /* On click */
 
 // Play/ pause functionality
 function playPause(playing, id, current) {
-    // Select correct gif by id
+    // Select current gif by id
     const currentGif = document.querySelector(`#${id} > .gif-img`);
 
     if (playing === 'false') {
@@ -125,6 +123,13 @@ function clearGifs() {
 // Repleaces spaces with + and sets input to lower case
 function slugify(req) {
     return req.replace(/\s+/g, '+').toLowerCase();
+}
+
+// Sets multiple attributes for an element at once
+function setAttributes(element, attributes) {
+    for (const key in attributes) {
+        element.setAttribute(key, attributes[key]);
+    }
 }
 
 /* Intialize */

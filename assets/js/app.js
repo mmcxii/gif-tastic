@@ -15,7 +15,7 @@ let topics = [
 /* Components */
 
 // Gif card with image and rating displayed
-function gifCard(id, url, rating) {
+function gifCard(id, still, url, rating) {
     // Select target
     const gifs = document.getElementById('gifs');
 
@@ -28,7 +28,7 @@ function gifCard(id, url, rating) {
     gifRating.textContent = rating;
 
     const gifImg = document.createElement('img');
-    setAttributes(gifImg, { class: 'gif-img', src: url });
+    setAttributes(gifImg, { class: 'gif-img', src: still, 'data-alt': url });
 
     // Build card
     gifCard.appendChild(gifRating);
@@ -67,39 +67,18 @@ function getRes(req) {
         .then((res) => res.json())
         .then((data) => {
             data.data.forEach((gif) => {
-                gifCard(gif.id, gif.images['original_still'].url, gif.rating);
+                gifCard(
+                    gif.id,
+                    gif.images['original_still'].url,
+                    gif.images['original'].url,
+                    gif.rating
+                );
             });
         })
         .catch((error) => console.error(error));
 }
 
 /* On click */
-
-// Play/ pause functionality
-function playPause(playing, id, current) {
-    // Select current gif by id
-    const currentGif = document.querySelector(`#${id} > .gif-img`);
-
-    if (playing === 'false') {
-        // If the gif is stopped, start it
-        currentGif.setAttribute(
-            'src',
-            `https://media2.giphy.com/media/${id}/giphy.gif?cid=${id}&rid=giphy.gif`
-        );
-
-        // Mark gif as playing
-        current.dataset.playing = 'true';
-    } else {
-        // If the gif is playing, stop it
-        currentGif.setAttribute(
-            'src',
-            `https://media0.giphy.com/media/${id}/giphy_s.gif?cid=${id}&rid=giphy_s.gif`
-        );
-
-        // Mark gif as stopped
-        current.dataset.playing = 'false';
-    }
-}
 
 // Removes all gifs from display
 function clearGifs() {
@@ -151,22 +130,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const options = document.getElementById('options');
     options.addEventListener('click', (e) => {
         // Only buttons are selected, not parent
-        if (e.target !== e.currentTarget) {
+        if (!e.target.matches('.btn')) {
+            return;
+        } else {
             getRes(e.target.textContent);
         }
-        e.stopPropagation();
     });
 
     // Assign all gifs the ability to play and pause
     const gifs = document.getElementById('gifs');
     gifs.addEventListener('click', (e) => {
         // Only cards are selected, not parent
-        if (e.target !== e.currentTarget) {
+        if (!e.target.matches('.gif-img')) {
+            return;
+        } else {
             // Selects card when image is clicked
-            const card = e.target.parentNode;
-            playPause(card.dataset.playing, card.id, card);
+            const temp = e.target.src;
+            e.target.src = e.target.dataset.alt;
+            e.target.dataset.alt = temp;
         }
-        e.stopPropagation();
     });
 
     // Search form functionality
